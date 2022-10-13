@@ -1,13 +1,19 @@
 use std::{fs, path::Path};
 
-use crate::algo::*;
+use serde::{de::Deserialize, Serialize};
 
-pub fn _save(results: Vec<(Int, Int)>, path: &Path) {
-    let encoded = bincode::serialize(&results).unwrap();
+pub fn save<T>(data: &T, path: &Path)
+where
+    T: ?Sized + Serialize,
+{
+    let encoded = bincode::serialize(data).unwrap();
     fs::write(path, encoded).unwrap()
 }
 
-pub fn _load(path: &Path) -> Vec<(Int, Int)> {
+pub fn load<T>(path: &Path) -> T
+where
+    for<'a> T: Deserialize<'a>,
+{
     let bytes = fs::read(path).unwrap();
     bincode::deserialize(&bytes[..]).unwrap()
 }
@@ -18,12 +24,9 @@ mod tests {
 
     #[test]
     fn test() {
-        let expected = vec![(7977, 4)];
-        _save(
-            expected.to_owned(),
-            Path::new("temp").join("test.bincode").as_path(),
-        );
-        let actual = _load(Path::new("temp").join("test.bincode").as_path());
+        let expected: Vec<(i16, i16)> = vec![(7977, 4)];
+        save(&expected, Path::new("temp").join("test.bincode").as_path());
+        let actual: Vec<(i16, i16)> = load(Path::new("temp").join("test.bincode").as_path());
         assert_eq!(expected, actual);
     }
 }
