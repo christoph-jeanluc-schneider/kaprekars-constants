@@ -1,8 +1,11 @@
-use crate::digits::Digits;
+use crate::digits::*;
+use serde::*;
 
-const K: i32 = 6174;
+pub const K: i32 = 6174;
 
+#[derive(Debug, Clone)]
 pub struct Calc {
+    pub input: Digits,
     pub state: Digits,
     pub counter: i32,
     pub is_done: bool,
@@ -10,8 +13,10 @@ pub struct Calc {
 
 impl From<i32> for Calc {
     fn from(number: i32) -> Self {
+        let digits = Digits::from(number);
         Calc {
-            state: Digits::from(number),
+            input: digits.to_owned(),
+            state: digits,
             counter: 0,
             is_done: false,
         }
@@ -43,4 +48,20 @@ pub fn next(digits: &Digits) -> Digits {
         return Digits::from(K);
     }
     Digits::from(i32::from(digits.desc()) - i32::from(digits.asc()))
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct CalcResult {
+    pub num: i32,
+    pub iter: i32,
+}
+
+impl From<i32> for CalcResult {
+    fn from(input: i32) -> Self {
+        let calc = Calc::from(input).run();
+        CalcResult {
+            num: input,
+            iter: calc.counter,
+        }
+    }
 }

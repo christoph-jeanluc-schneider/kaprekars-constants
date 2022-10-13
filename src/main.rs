@@ -1,19 +1,19 @@
 use calc::*;
 use digits::*;
+use io::{save, load};
 use rand::*;
+use std::path::Path;
 
 mod calc;
 mod digits;
+mod io;
+
+const N: usize = 10;
 
 fn main() {
     let mut rng = thread_rng();
 
-    let mut input: i32 = rng.gen_range(1000..9999);
-    while invalid_i32(&input) {
-        input = rng.gen_range(1000..9999)
-    }
-
-    let input: Vec<i32> = [0; 20]
+    let results: Vec<CalcResult> = [0; N]
         .iter()
         .map(|_| {
             let mut n: i32 = rng.gen_range(1000..9999);
@@ -22,17 +22,14 @@ fn main() {
             }
             n
         })
+        .map(|n| CalcResult::from(n))
         .collect();
 
-    println!("input: {:?}", input);
+    save(results, Path::new("temp").join("save.file").as_path());
 
-    for n in input {
-        let calc = Calc::from(n).run();
-        println!(
-            "{} -> {} in {} iterations",
-            n,
-            i32::from(calc.state),
-            calc.counter
-        );
-    }    
+    let loaded = load(Path::new("temp").join("save.file").as_path());
+    for calc in loaded.iter() {
+        println!("CalcResult {{ num: {}, iter: {} }}", calc.num, calc.iter);
+    }
 }
+
