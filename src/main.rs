@@ -1,9 +1,9 @@
-use digits::*;
 use calc::*;
+use digits::*;
 use rand::*;
 
-mod digits;
 mod calc;
+mod digits;
 
 fn main() {
     let mut rng = thread_rng();
@@ -13,14 +13,26 @@ fn main() {
         input = rng.gen_range(1000..9999)
     }
 
-    println!("input: {}", input);
+    let input: Vec<i32> = [0; 20]
+        .iter()
+        .map(|_| {
+            let mut n: i32 = rng.gen_range(1000..9999);
+            while invalid_i32(&n) {
+                n = rng.gen_range(1000..9999)
+            }
+            n
+        })
+        .collect();
 
-    let calc = Calc::from(input).run();
-    
-    println!(
-        "{} -> {} in {} iterations",
-        input,
-        i32::from(calc.state),
-        calc.counter
-    );
+    println!("input: {:?}", input);
+
+    for n in input {
+        let calc = Calc::from(n).run();
+        println!(
+            "{} -> {} in {} iterations",
+            n,
+            i32::from(calc.state),
+            calc.counter
+        );
+    }    
 }
