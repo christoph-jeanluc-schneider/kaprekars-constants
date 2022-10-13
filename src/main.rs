@@ -1,14 +1,12 @@
-use kaprekars_constants::algo::*;
-use rand::*;
+use kaprekars_constants::{tokio::count_all, numbers::gen};
+// use rand::*;
 
-const N: usize = 10;
+// const N: usize = 10;
 
-fn main() {
-    let mut rng = thread_rng();
-
-    let numbers: Vec<Int> = [0; N].iter().map(|_| rng.gen_range(1000..10000)).collect();
-
-    let results: Vec<(Int, Int)> = numbers.into_iter().map(|n| (n, count(n))).collect();
-
+#[tokio::main]
+async fn main() {
+    let nums: Vec<u32> = vec![1111, 2222, 1000, 2000];
+    let results = count_all(nums, 2).await;
     println!("{:?}", results);
+    println!("{}", gen().len());
 }
