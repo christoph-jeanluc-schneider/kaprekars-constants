@@ -1,9 +1,9 @@
+use algo::{count, Int};
 use calc::*;
 use digits::*;
-use io::{save, load};
 use rand::*;
-use std::path::Path;
 
+mod algo;
 mod calc;
 mod digits;
 mod io;
@@ -13,7 +13,7 @@ const N: usize = 10;
 fn main() {
     let mut rng = thread_rng();
 
-    let results: Vec<CalcResult> = [0; N]
+    let numbers_a: Vec<i32> = [0; N]
         .iter()
         .map(|_| {
             let mut n: i32 = rng.gen_range(1000..9999);
@@ -22,14 +22,14 @@ fn main() {
             }
             n
         })
-        .map(|n| CalcResult::from(n))
         .collect();
 
-    save(results, Path::new("temp").join("save.file").as_path());
+    let numbers_b: Vec<Int> = numbers_a.iter().map(|n| *n as Int).collect();
 
-    let loaded = load(Path::new("temp").join("save.file").as_path());
-    for calc in loaded.iter() {
-        println!("CalcResult {{ num: {}, iter: {} }}", calc.num, calc.iter);
-    }
+    let results_a: Vec<CalcResult> = numbers_a.into_iter().map(|n| CalcResult::from(n)).collect();
+
+    let results_b: Vec<Int> = numbers_b.into_iter().map(|n| count(n)).collect();
+
+    println!("{:?}", results_a);
+    println!("{:?}", results_b);
 }
-

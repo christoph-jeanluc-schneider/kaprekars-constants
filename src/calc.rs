@@ -3,7 +3,7 @@ use serde::*;
 
 pub const K: i32 = 6174;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Calc {
     pub input: Digits,
     pub state: Digits,
@@ -50,7 +50,7 @@ pub fn next(digits: &Digits) -> Digits {
     Digits::from(i32::from(digits.desc()) - i32::from(digits.asc()))
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct CalcResult {
     pub num: i32,
     pub iter: i32,

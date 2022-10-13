@@ -1,6 +1,6 @@
 use std::fmt::{Debug, Display};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Digits(pub Vec<i32>);
 
 impl Display for Digits {
