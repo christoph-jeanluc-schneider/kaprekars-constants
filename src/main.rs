@@ -15,19 +15,12 @@ fn main() {
 
     println!("input: {}", input);
 
-    let mut iteration = Iteration::from(input);
-
-    for _ in 0..20 {
-        iteration.next();
-        if iteration.is_done {
-            break;
-        }
-    }
-
+    let calc = Calc::from(input).run();
+    
     println!(
         "{} -> {} in {} iterations",
         input,
-        i32::from(iteration.state),
-        iteration.count
+        i32::from(calc.state),
+        calc.counter
     );
 }
