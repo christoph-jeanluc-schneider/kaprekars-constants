@@ -24,10 +24,10 @@ cargo bench
 | method              | avg       |
 | ------------------- | --------- |
 | single thread       | 669.21 ns |
-| tokio (1 thread)    | 1.1990 ms |
-| tokio (4 threads)   | 836.54 µs |
-| tokio (8 threads)   | 750.21 µs |
-| tokio (16 threads)  | 730.35 µs |
-| tokio (32 threads)  | 720.94 µs |
-| tokio (64 threads)  | 715.48 µs |
-| tokio (128 threads) | 714.77 µs |
+| tokio (1 chunk)    | 1.1990 ms |
+| tokio (4 chunks)   | 836.54 µs |
+| tokio (8 chunks)   | 750.21 µs |
+| tokio (16 chunks)  | 730.35 µs |
+| tokio (32 chunks)  | 720.94 µs |
+| tokio (64 chunks)  | 715.48 µs |
+| tokio (128 chunks) | 714.77 µs |
