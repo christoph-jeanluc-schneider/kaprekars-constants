@@ -1,7 +1,7 @@
 pub type Int = i16;
-pub type Iterations = Int;
+type Iterations = Int;
 
-pub const K: Int = 6174;
+const K: Int = 6174;
 const MAX_ITER: Int = 10;
 
 pub fn count(mut n: Int) -> Iterations {

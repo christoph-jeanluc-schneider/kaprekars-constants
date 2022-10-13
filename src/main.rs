@@ -1,12 +1,5 @@
-use algo::{count, Int};
-use calc::*;
-use digits::*;
+use kaprekars_constants::{digits::*, algo::*, calc::*};
 use rand::*;
-
-mod algo;
-mod calc;
-mod digits;
-mod io;
 
 const N: usize = 10;
 
@@ -28,7 +21,7 @@ fn main() {
 
     let results_a: Vec<CalcResult> = numbers_a.into_iter().map(|n| CalcResult::from(n)).collect();
 
-    let results_b: Vec<Int> = numbers_b.into_iter().map(|n| count(n)).collect();
+    let results_b: Vec<(Int, Int)> = numbers_b.into_iter().map(|n| (n, count(n))).collect();
 
     println!("{:?}", results_a);
     println!("{:?}", results_b);
