@@ -19,7 +19,7 @@ cargo bench
 | isize   | 35.667 ns     |
 | i128    | 144.29 ns     |
 
-## Avg. time for all 8991 using u32
+### Avg. time for all 8991 using u32
 
 | method                     | avg       |
 | -------------------------- | --------- |
