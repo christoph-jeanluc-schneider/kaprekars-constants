@@ -21,13 +21,20 @@ cargo bench
 
 ## Avg. time for all 8991 using u32
 
-| method              | avg       |
-| ------------------- | --------- |
-| single thread       | 669.21 ns |
-| tokio (1 chunk)    | 1.1990 ms |
-| tokio (4 chunks)   | 836.54 µs |
-| tokio (8 chunks)   | 750.21 µs |
-| tokio (16 chunks)  | 730.35 µs |
-| tokio (32 chunks)  | 720.94 µs |
-| tokio (64 chunks)  | 715.48 µs |
-| tokio (128 chunks) | 714.77 µs |
+| method                     | avg       |
+| -------------------------- | --------- |
+| single thread              | 601.63 ns |
+| tokio 12 thr. (1 chunk)    | 578.32 µs |
+| tokio 12 thr. (4 chunks)   | 214.01 µs |
+| tokio 12 thr. (8 chunks)   | 111.68 µs |
+| tokio 12 thr. (16 chunks)  | 123.41 µs |
+| tokio 12 thr. (32 chunks)  | 103.30 µs |
+| tokio 12 thr. (64 chunks)  | 97.589 µs |
+| tokio 12 thr. (128 chunks) | 100.01 µs |
+| tokio 8 thr. (64 chunks)   | 107.71 µs |
+| tokio 12 thr. (64 chunks)  | 98.865 µs |
+| tokio 16 thr. (64 chunks)  | 97.658 µs |
+| tokio 20 thr. (64 chunks)  | 97.901 µs |
+| tokio 20 thr. (128 chunks) | 99.682 µs |
+| tokio 24 thr. (64 chunks)  | 97.518 µs |
+| tokio 40 thr. (64 chunks)  | 98.247 µs |
