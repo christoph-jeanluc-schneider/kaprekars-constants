@@ -21,7 +21,7 @@ impl From<i32> for Calc {
 impl Calc {
     pub fn next(&mut self) -> i32 {
         self.counter += 1;
-        self.state = next(self.state.to_owned());
+        self.state = next(&self.state);
         let number = i32::from(self.state.to_owned());
         self.is_done = number.eq(&K);
         number
@@ -38,14 +38,9 @@ impl Calc {
     }
 }
 
-pub fn next(digits: Digits) -> Digits {
+pub fn next(digits: &Digits) -> Digits {
     if i32::from(digits.clone()) == K {
         return Digits::from(K);
     }
-    let minuend = i32::from(digits.desc());
-    let subtrahend = i32::from(digits.asc());
-
-    println!("{} - {} = {}", minuend, subtrahend, minuend - subtrahend);
-
-    Digits::from(minuend - subtrahend)
+    Digits::from(i32::from(digits.desc()) - i32::from(digits.asc()))
 }

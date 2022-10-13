@@ -1,9 +1,9 @@
 use digits::*;
-use kaprekars::*;
+use calc::*;
 use rand::*;
 
 mod digits;
-mod kaprekars;
+mod calc;
 
 fn main() {
     let mut rng = thread_rng();
