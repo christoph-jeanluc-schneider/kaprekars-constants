@@ -1,7 +1,4 @@
 use kaprekars_constants::{tokio::count_all, numbers::gen};
-// use rand::*;
-
-// const N: usize = 10;
 
 #[tokio::main]
 async fn main() {
